@@ -1,0 +1,670 @@
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NFL Fan Personas</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Inter, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: #0b0b0d;
+      color: #f5f5f7;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+
+    header {
+      margin-bottom: 32px;
+    }
+
+    header h1 {
+      font-size: 2.4rem;
+      margin-bottom: 12px;
+    }
+
+    .subtitle {
+      color: #b5b5c0;
+      max-width: 900px;
+    }
+
+    /* Persona selector */
+    .persona-selector {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+
+    .persona-btn {
+      background: #16161a;
+      border: 1px solid #26262c;
+      border-radius: 14px;
+      padding: 18px;
+      color: #f5f5f7;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+    }
+
+    .persona-btn:hover {
+      border-color: #5a5aff;
+      transform: translateY(-2px);
+    }
+
+    .persona-btn.active {
+      background: linear-gradient(135deg, #5a5aff, #7b7bff);
+      color: #ffffff;
+      border-color: transparent;
+    }
+
+    .persona-title {
+      font-weight: 600;
+      font-size: 1.05rem;
+    }
+
+    .persona-subtitle {
+      font-size: 0.85rem;
+      opacity: 0.85;
+      margin-top: 4px;
+    }
+
+    /* Persona content */
+    .persona-content {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .persona-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .persona-header {
+      margin-bottom: 28px;
+    }
+
+    .persona-header h2 {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+
+    .persona-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      background: #1e1e24;
+      border: 1px solid #2c2c35;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      color: #cfcfe6;
+    }
+
+    /* Sections */
+    .section {
+      margin-bottom: 36px;
+    }
+
+    .section h3 {
+      font-size: 1.2rem;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon {
+      font-size: 1.2rem;
+    }
+
+    .section p {
+      color: #d6d6de;
+      margin-bottom: 12px;
+      max-width: 900px;
+    }
+
+    /* Grids */
+    .list-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .list-item {
+      background: #141418;
+      border: 1px solid #26262c;
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .list-item h4 {
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+    }
+
+    .list-item ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .list-item li {
+      font-size: 0.85rem;
+      color: #cfcfe0;
+      margin-bottom: 6px;
+    }
+
+    /* Values & pain points */
+    .value-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .value-item {
+      background: #1a1a20;
+      border: 1px solid #2a2a33;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+    }
+
+    .pain-point {
+      background: #1a1416;
+      border: 1px solid #3a1f24;
+      color: #ffb4b4;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      margin-bottom: 10px;
+      max-width: 700px;
+    }
+
+    /* Strategy note */
+    .strategy-note {
+      margin-top: 48px;
+      padding: 28px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #1a1a2e, #23234a);
+      border: 1px solid #3a3a6a;
+    }
+
+    .strategy-note h3 {
+      margin-bottom: 12px;
+    }
+
+    .strategy-note p {
+      color: #e6e6ff;
+    }
+  </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏈 NFL Fan Personas</h1>
+            <p class="subtitle"><strong>Media Strategy:</strong> Leverage the NFL's powerful media ecosystem to meet casual fans where belonging-centered experiences transform them into advocates who organically spread continuous community awareness.</p>
+        </header>
+
+        <div class="persona-selector">
+            <button class="persona-btn active" onclick="showPersona('lilgirl')">
+                <div class="persona-title">The Lil Girl 👧</div>
+                <div class="persona-subtitle">Gen Alpha | 10-18</div>
+            </button>
+            <button class="persona-btn" onclick="showPersona('lazyboy')">
+                <div class="persona-title">The Lazy Boy Dad 🎣</div>
+                <div class="persona-subtitle">Gen X | 35-50</div>
+            </button>
+            <button class="persona-btn" onclick="showPersona('addie')">
+                <div class="persona-title">The Addie 🎓</div>
+                <div class="persona-subtitle">Gen Z | 19-28</div>
+            </button>
+        </div>
+
+        <!-- Lil Girl Persona -->
+        <div id="lilgirl" class="persona-content active">
+            <div class="persona-header">
+                <h2>👧 The Lil Girl</h2>
+                <div class="persona-tags">
+                    <span class="tag">Gen Alpha | Ages 10-18</span>
+                    <span class="tag">Community-First</span>
+                    <span class="tag">Social Connection</span>
+                    <span class="tag">Taylor Swift Effect</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="icon">🎯</span> The Profile</h3>
+                <p>She's not here for the stats. She's here for the vibes, the group chats, and the memories. NFL Flag is her gateway—participation up 57% after Taylor Swift brought her friends to the sport. She makes up 47% of the NFL fanbase, part of a generation where 56% of girls aged 8+ are NFL fans. The league's commitment to gender equality resonates: most women in on-field coaching roles of any men's sport in 2023.</p>
+                
+                <p>Football isn't about strategy—it's about belonging. She'd enthusiastically host tailgates and watch parties, not because she knows who's playing, but because her friends are there. It's about shared experiences, not game analysis. The memories matter more than the final score.</p>
+                
+                <p>The Taylor Swift movement unlocked something powerful: when someone she trusts invites her in, she shows up. Not for the sport itself, but for the community it creates. That's where she lives—in the connections, the traditions, the feeling of being part of something bigger.</p>
+            </div>
+
+            <div class="section">
+                <h3><span class="icon">📊</span> Key Statistics</h3>
+                <div class="list-grid">
+                    <div class="list-item">
+                        <h4>Gender Dynamics</h4>
+                        <ul>
+                            <li>38% of women: not at all interested in NFL</li>
+                            <li>19% in top interest level</li>
+                            <li>28% somewhat interested</li>
+                            <li>15% not very interested</li>
+                        </ul>
+                    </div>
+                    <div class="list-item">
+                        <h4>Growth Trends</h4>
+                        <ul>
+                            <li>57% increase after Taylor Swift appearances</li>
+                            <li>47% of NFL fanbase is female</li>
+                            <li>56% of girls 8+ are NFL fans</li>
+                            <li>NFL Flag rapidly expanding</li>
+                        </ul>
+                    </div>
+                    <div class="list-item">
+                        <h4>Age Demographics</h4>
+                        <ul>
+                            <li>18-34 year olds: 35% avid fans</li>
+                            <li>28% casual fans in age group</li>
+                            <li>Community-driven engagement</li>
+                        </ul>
+                    </div>
+                    <div class="list-item">
+                        <h4>NFL Leadership</h4>
+                        <ul>
+                            <li>Most women in coaching roles (2023)</li>
+                            <li>Forefront of gender equality in sports</li>
+                            <li>Female-friendly Super Bowl advertising</li>
+                            <li>Flag football driving female participation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="icon">💭</span> Values</h3>
+                <div class="value-list">
+                    <div class="value-item">Friends, family, and connection over competition</div>
+                    <div class="value-item">Community and belonging experiences</div>
+                    <div class="value-item">Shared memories and traditions</div>
+                    <div class="value-item">Social experiences &gt; game knowledge</div>
+                    <div class="value-item">Peer influence and trusted recommendations</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="icon">⚠️</span> Pain Points</h3>
+                <div class="pain-point">Feels excluded from "sports knowledge" culture</div>
+                <div class="pain-point">Not interested in technical game analysis</div>
+                <div class="pain-point">Needs social permission to participate casually</div>
+                <div class="pain-point">Wants community without commitment to expertise</div>
+            </div>
+
+            <div class="section">
+                <h3><span class="icon">📱</span> How to Reach</h3>
+                <div class="list-grid">
+                    <div class="list-item">
+                        <h4>Social Platforms</h4>
+                        <p>TikTok, Instagram, YouTube Shorts</p>
+                    </div>
+                    <div class="list-item">
+                        <h4>Content Style</h4>
+                        <p>Behind-the-scenes, fan experiences, community moments</p>
+                    </div>
+                    <div class="list-item">
+                        <h4>Messaging</h4>
+                        <p>Belonging-focused, no sports knowledge required</p>
+                    </div>
+                    <div class="list-item">
+                        <h4>Influencers</h4>
+                        <p>Peer-driven campaigns, Taylor Swift effect, NFL Flag ambassadors</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="icon">🎯</span> Content Strategy</h3>
+                <p><strong>Community-First Experiences:</strong> Create tailgate tutorials, watch party guides, and friendship-building content that emphasizes the social aspect of NFL culture.</p>
+                
+                <p><strong>NFL Flag Integration:</strong> Showcase the growing female participation in flag football as an accessible entry point that doesn't require deep sport knowledge.</p>
+                
+                <p><strong>Pop Culture Crossovers:</strong> Leverage the Taylor Swift effect with content that connects NFL to broader cultural moments and celebrity fandom.</p>
+                
+                <p><strong>Memory-Making Moments:</strong> Focus on creating shareable experiences and traditions rather than game analysis or player stats.</p>
+            </div>
+
+            <div class="section">
+                <h3><span class="icon">🚫</span> Why They Miss NFL Initiatives</h3>
+                <div class="list-item">
+                    <ul>
+                        <li>Traditional marketing assumes sports knowledge interest</li>
+                        <li>Community aspect not highlighted in standard campaigns</li>
+                        <li>Needs peer validation, not brand messaging</li>
+                        <li>Looking for social experiences, not athletic programming</li>
+                        <li>Wants low-barrier entry without expertise requirements</li>
+                        <li>Influenced by cultural moments (Taylor Swift) not traditional sports media</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lazy Boy Dad Persona (unchanged) -->
+        <div id="lazyboy" class="persona-content">
+            <div class="persona-header">
+                <h2>🎣 The Lazy Boy Dad</h2>
+                <div class="persona-tags">
+                    <span class="tag">Gen X | Ages 35-50</span>
+                    <span class="tag">Parent &amp; Family Anchor</span>
+                    <span class="tag">$117k Income</span>
+                    <span class="tag">Manager</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="icon">👤</span> The Profile</h3>
+                <p>Dave, 42. Bald. Flannel. Engineering manager who'd rather be on his boat. The same Levi's he's owned for a decade because why fix what isn't broken? Sunday is the Packers game from his worn leather recliner, phone in hand, half-watching, mostly scrolling. Saturday is his daughter's soccer game and maybe Home Depot. His wife manages the family calendar. He shows up where he's told.</p>
+                
+                <p>The NFL is background noise, not his identity. He couldn't tell you who won the Super Bowl three years ago but he can talk Monday morning about "that crazy play" everyone saw. Social currency without investment. That's the deal.</p>
+                
+                <p>Parenting is secretly his greatest joy though he'd never say it that way. 90% of Gen X dads feel the same. He's tripled the childcare his own dad did but it's still less than half of what his wife handles. Work-life balance? Difficult. 52% of working dads agree. The pressure to provide financially is crushing.</p>
+                
+                <p>His engineer brain smells marketing BS instantly. "NFL Initiatives"? Sounds like corporate do-gooder stuff that doesn't affect his actual life. He's outdoors-oriented. Fishing in summer. Skiing in winter. If it requires more than two clicks on the ESPN app or doesn't fit into his 15-minute commute, it's not happening. Easy. Practical. No disruption. That's all he wants.</p>
+                
+                <p>His version of being an involved dad is showing up to the soccer game on Saturday. Not signing up for programs.</p>
+            </div>
+
+            <div class="section">
+                <h3><span class="icon">📅</span> Daily Touchpoints</h3>
+                <div class="list-grid">
+                    <div class="list-item">
+                        <h4>6:45 AM Commute</h4>
+                        <p>ESPN Radio, sports talk in background</p>
+                    </div>
+                    <div class="list-item">
+                        <h4>Lunch Break</h4>
+                        <p>Checks ESPN app scores, 2 minutes max</p>
+                    </div>
+                    <div class="list-item">
+                        <h4>Saturday</h4>
+                        <p>Daughter's soccer game, Home Depot run, yard work</p>
+                    </div>
+                    <div class="list-item">
+                        <h4>Sunday</h4>
+                        <p>Packers game (if kids allow it), recliner, phone scrolling</p>
+                    </div>
+                    <div class="list-item">
+                        <h4>Monday AM</h4>
+                        <p>Water cooler sports talk with colleagues</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="icon">📺</span> What He Watches/Does</h3>
+                <div class="list-grid">
+                    <div class="list-item">
+                        <h4>Sports</h4>
+                        <p>NFL (Packers), occasional college football, not analysis shows</p>
+                    </div>
+                    <div class="list-item">
+                        <h4>Streaming</h4>
+                        <p>Yellowstone, Reacher, Top Gear, documentaries</p>
+                    </div>
+                    <div class="list-item">
+                        <h4>Outdoors</h4>
+                        <p>Fishing (summer), skiing (winter), boat maintenance</p>
+                    </div>
+                    <div class="list-item">
+                        <h4>Weekend</h4>
+                        <p>Grilling, Home Depot projects, daughter's activities</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="icon">💭</span> Values</h3>
+                <div class="value-list">
+                    <div class="value-item">Ease over effort</div>
+                    <div class="value-item">Family &gt; everything else</div>
+                    <div class="value-item">Practical, no disruption</div>
+                    <div class="value-item">Monday social capital</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="icon">⚠️</span> Pain Points</h3>
+                <div class="pain-point">Work-life balance pressure (52% struggle)</div>
+                <div class="pain-point">Marketing that feels like homework</div>
+                <div class="pain-point">Programs requiring sign-ups or commitment</div>
+            </div>
+
+            <div class="section">
+                <h3><span class="icon">📱</span> How to Reach</h3>
+                <div class="list-grid">
+                    <div class="list-item">
+                        <h4>Sports Radio</h4>
+                        <p>ESPN Radio during commute</p>
+                    </div>
+                    <div class="list-item">
+                        <h4>ESPN App</h4>
+                        <p>Quick score checks, 2-minute max engagement</p>
+                    </div>
+                    <div class="list-item">
+                        <h4>Peacock</h4>
+                        <p>Streaming during game time</p>
+                    </div>
+                    <div class="list-item">
+                        <h4>Stadium OOH</h4>
+                        <p>Billboard and signage during events</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="icon">🎯</span> Content Strategy</h3>
+                <p><strong>Keep it Simple:</strong> Short highlights, prime-time games, family-friendly activations, quick mobile updates</p>
+                <p><strong>Low Barrier to Entry:</strong> No sign-ups, no homework, no disruption to routine</p>
+                <p><strong>Social Currency:</strong> Give him Monday morning talking points without effort</p>
+            </div>
+
+            <div class="section">
+                <h3><span class="icon">🚫</span> Why They Miss NFL Initiatives</h3>
+                <div class="list-item">
+                    <ul>
+                        <li>NFL is background noise - not his life, just entertainment</li>
+                        <li>Engineer mindset - skeptical of marketing</li>
+                        <li>White man who loves snow ski, boat, fishing</li>
+                        <li>Outdoorsy - not community program type</li>
+                        <li>Wears Levi jeans and flannels - not athleisure demo</li>
+                        <li>Weekends = family activities, not NFL events</li>
+                        <li>Views initiatives as "extra" not essential</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Addie Persona -->
+        <div id="addie" class="persona-content">
+            <div class="persona-header">
+                <h2>🎓 The Addie</h2>
+                <div class="persona-tags">
+                    <span class="tag">Gen Z | Ages 19-28</span>
+                    <span class="tag">College Student</span>
+                    <span class="tag">Social Organizer</span>
+                    <span class="tag">Community-First</span>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="icon">🎯</span> The Profile</h3>
+                <p>She's the college girl who doesn't know who's playing but absolutely knows she's hosting the watch party. Her group chat is already planning the tailgate—not because anyone cares about the game strategy, but because it's what everyone's doing. The NFL isn't about sports for her; it's about the experience, the aesthetic, the memories with friends.</p>
+                
+                <p>She represents the powerful shift in NFL demographics: 38% of women aren't interested in the sport itself, but they're interested in what surrounds it. She's in that 28% who are "somewhat interested"—engaged enough to show up, but not invested in the technical details.</p>
+                
+                <p>The Taylor Swift effect? That's her. The 57% increase in female engagement after Taylor showed up at games? That's her demographic. She's proof that pop culture crossovers work, that community matters more than competition, and that the NFL's gender equality push is creating space for fans like her.</p>
+                
+                <p>She's enthusiastic and willing to be the organizer. She'll host, she'll decorate, she'll make it an event. But don't ask her about the quarterback's stats or the playoff implications. She's there for her friends, for the vibes, for the photos that'll go on her Instagram story with the caption "game day 🏈✨"</p>
+            </div>
+
+            <div class="section">
+                <h3><span class="icon">📊</span> Understanding Her World</h3>
+                <div class="list-grid">
+                    <div class="list-item">
+                        <h4>Social Dynamics</h4>
+                        <ul>
+                            <li>Enthusiastic watch party host</li>
+                            <li>Community over competition</li>
+                            <li>Creates experiences for friend groups</li>
+                            <li>Instagram-worthy moments matter</li>
+                        </ul>
+                    </div>
+                    <div class="list-item">
+                        <h4>NFL Engagement</h4>
+                        <ul>
+                            <li>There for friends and connection</li>
+                            <li>Doesn't really know who's playing</li>
+                            <li>Makes memories, not analysis</li>
+                            <li>Pop culture crossover fan</li>
+                        </ul>
+                    </div>
+                    <div class="list-item">
+                        <h4>Cultural Context</h4>
+                        <ul>
+                            <li>Part of 57% increase post-Taylor Swift</li>
+                            <li>18-34 demographic: 35% avid, 28% casual</li>
+                            <li>Benefits from NFL's gender equality push</li>
+                            <li>NFL Flag participation growing</li>
+                        </ul>
+                    </div>
+                    <div class="list-item">
+                        <h4>College Life</h4>
+                        <ul>
+                            <li>Social calendar organizer</li>
+                            <li>Prioritizes friend experiences</li>
+                            <li>Event aesthetics matter</li>
+                            <li>Community builder</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="icon">💭</span> Values</h3>
+                <div class="value-list">
+                    <div class="value-item">Friends, family, and connection above all</div>
+                    <div class="value-item">Community experiences over individual achievement</div>
+                    <div class="value-item">Creating memories and traditions</div>
+                    <div class="value-item">Aesthetic and shareable moments</div>
+                    <div class="value-item">Inclusive, welcoming environments</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="icon">⚠️</span> Pain Points</h3>
+                <div class="pain-point">Feels pressure to understand sports to participate</div>
+                <div class="pain-point">Traditional NFL marketing assumes sports knowledge</div>
+                <div class="pain-point">Wants to belong without becoming a "superfan"</div>
+                <div class="pain-point">Needs permission to participate casually</div>
+            </div>
+
+            <div class="section">
+                <h3><span class="icon">📱</span> How to Reach</h3>
+                <div class="list-grid">
+                    <div class="list-item">
+                        <h4>Social Platforms</h4>
+                        <p>Instagram, TikTok, Pinterest (for party planning)</p>
+                    </div>
+                    <div class="list-item">
+                        <h4>Content Type</h4>
+                        <p>Watch party ideas, tailgate aesthetics, friend group content</p>
+                    </div>
+                    <div class="list-item">
+                        <h4>Influencers</h4>
+                        <p>College lifestyle creators, event planners, Taylor Swift crossover content</p>
+                    </div>
+                    <div class="list-item">
+                        <h4>Messaging</h4>
+                        <p>"Come for the community, stay for the memories"</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h3><span class="icon">🎯</span> Content Strategy</h3>
+                <p><strong>Party Planning Guides:</strong> Create shareable content for hosting watch parties and tailgates—think aesthetics, playlists, snack ideas, not game analysis.</p>
+                
+                <p><strong>Pop Culture Integration:</strong> Leverage moments like the Taylor Swift effect. Show how NFL intersects with broader culture, music, and celebrity.</p>
+                
+                <p><strong>Community Over Competition:</strong> Frame NFL experiences as friend gatherings and memory-making opportunities, not sports expertise requirements.</p>
+                
+                <p><strong>Visual Storytelling:</strong> Instagram-worthy content that shows the social experience—friend groups, celebrations, traditions—not just the game.</p>
+                
+                <p><strong>Permission-Based Messaging:</strong> "You don't need to know the plays to love game day" — give her permission to participate on her terms.</p>
+            </div>
+
+            <div class="section">
+                <h3><span class="icon">🚫</span> Why They Miss NFL Initiatives</h3>
+                <div class="list-item">
+                    <ul>
+                        <li>Not interested in technical football knowledge</li>
+                        <li>Standard NFL marketing targets sports enthusiasts</li>
+                        <li>Community aspect not highlighted in traditional campaigns</li>
+                        <li>Needs social permission, not sports education</li>
+                        <li>Looking for experience design, not athletic programming</li>
+                        <li>Influenced by pop culture moments, not sports media</li>
+                        <li>Wants low-barrier entry without expertise requirements</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="strategy-note">
+                <h3>🎯 Strategic Opportunity</h3>
+                <p>Both The Lil Girl and The Addie represent the NFL's fastest-growing demographic: women and girls who engage with football through community and culture, not competition. The 57% increase after Taylor Swift appearances proves that when the NFL meets them where they are—in pop culture, social experiences, and friend groups—they show up enthusiastically.</p>
+                
+                <p>The key is removing the barrier of "sports knowledge required" and instead creating belonging-centered experiences that prioritize memories, friendships, and shared traditions over game analysis.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showPersona(personaId) {
+            // Hide all personas
+            document.querySelectorAll('.persona-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active state from all buttons
+            document.querySelectorAll('.persona-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Show selected persona
+            document.getElementById(personaId).classList.add('active');
+            
+            // Add active state to clicked button
+            event.target.closest('.persona-btn').classList.add('active');
+            
+            // Scroll to top of content
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+
+</body>
